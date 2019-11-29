@@ -1,0 +1,26 @@
+{
+  "name": "whatsapp_load_balance",
+  "version": "1.0.0",
+  "description": "",
+  "main": "build/start.js",
+  "scripts": {
+    "test": "test",
+    "start-dev": "nodemon --config \"./utils/nodemon.json\""
+  },
+  "author": "Kevyn Pinheiro Klava",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/express": "^4.17.2",
+    "@types/node": "^12.12.14",
+    "nodemon": "^2.0.1",
+    "ts-node": "^8.5.4",
+    "tslint": "^5.20.1",
+    "typescript": "^3.7.2"
+  },
+  "dependencies": {
+    "@overnightjs/core": "^1.6.9",
+    "@overnightjs/logger": "^1.1.9",
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1"
+  }
+}
