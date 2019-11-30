@@ -1,19 +1,19 @@
 import Message, {IMessage} from "./message";
 
 export class App {
-    public GetMessages = (): Promise<IMessage[]> =>
-        this.ToPromise(c => Message.find(c));
+    public getMessages = (): Promise<IMessage[]> =>
+        this.repoToPromise(c => Message.find(c));
 
-    public GetMessage = (id: string): Promise<IMessage> =>
-        this.ToPromise(callback => Message.findById(id, callback));
+    public getMessage = (id: string): Promise<IMessage> =>
+        this.repoToPromise(callback => Message.findById(id, callback));
 
-    public SaveMessage = (msg: IMessage): Promise<IMessage> =>
-        this.ToPromise(callback => Message.insertMany([msg], (err, res) => callback(err, res[0])));
+    public saveMessage = (msg: IMessage): Promise<IMessage> =>
+        this.repoToPromise(callback => Message.insertMany([msg], (err, res) => callback(err, res[0])));
 
-    public UpdateMessage = (id: string, msg: IMessage) =>
-        this.ToPromise(callback => Message.updateOne({"_id": id}, msg, (err, _) => callback(err, msg)));
+    public updateMessage = (id: string, msg: IMessage) =>
+        this.repoToPromise(callback => Message.updateOne({"_id": id}, msg, (err, _) => callback(err, msg)));
 
-    private ToPromise = <T>(call: (callback: (err: any, res: T) => void) => void): Promise<T> =>
+    private repoToPromise = <T>(call: (callback: (err: any, res: T) => void) => void): Promise<T> =>
         new Promise<T>((resolve, reject) => call((err, res) => {
             if(err){
                 reject(err);

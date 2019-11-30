@@ -13,28 +13,28 @@ export class MessageController {
     private redirect(req: Request, res: Response){
         Logger.Info(`Request - Redirect for id: ${req.params.id}`);
 
-        this.responseFactory(() => this.app.GetMessage(req.params.id))(res);
+        this.responseFactory(() => this.app.getMessage(req.params.id))(res);
     }
 
     @Get('')
     private listAllMessages(req: Request, res: Response){
         Logger.Info('Request - List all Messages');
 
-        this.responseFactory(this.app.GetMessages)(res);
+        this.responseFactory(this.app.getMessages)(res);
     }
 
     @Post('')
     private saveNewMessage(req: Request, res: Response){
         Logger.Info('Inserting new Message');
 
-        this.responseFactory(() => this.app.SaveMessage(req.body))(res);
+        this.responseFactory(() => this.app.saveMessage(req.body))(res);
     }
 
     @Put(':id')
     private updateMessage(req: Request, res: Response){
         Logger.Info(`Updating message: ${req.params.id}`);
 
-        this.responseFactory(() => this.app.UpdateMessage(req.params.id, req.body))(res);
+        this.responseFactory(() => this.app.updateMessage(req.params.id, req.body))(res);
     }
 
     private responseFactory = <T>(callback: () => Promise<T>): apiEndpoint =>
