@@ -9,11 +9,17 @@ export const connectionString: string = process.env.DATABASE_URL || "mongodb://1
 export const messageCollection: string = "message";
 export const requestCollection: string = "request";
 
-connect(connectionString, (err: any) => {
-    if(err){
-        Logger.Err('Error connecting to Mongo Db');
-        return;
-    }
-
-    Logger.Info('Successfully Connected to Mongo Db');
-});
+const doConnection = (): void => {
+    connect(connectionString, (err: any) => {
+        if(err){
+            Logger.Err('Error connecting to Mongo Db');
+            Logger.Err(`Connection String: ${connectionString}`);
+            
+            setTimeout(doConnection, 10*1000);
+            return;
+        }
+    
+        Logger.Info('Successfully Connected to Mongo Db');
+    });
+};
+doConnection();
