@@ -5,7 +5,9 @@
   "main": "build/start.js",
   "scripts": {
     "test": "test",
-    "start-dev": "nodemon --config \"./utils/nodemon.json\""
+    "start-dev": "nodemon --config \"./utils/nodemon.json\"",
+    "build": "rm -rf ./build/ && tsc",
+    "start": "node build/start.js"
   },
   "author": "Kevyn Pinheiro Klava",
   "license": "ISC",
