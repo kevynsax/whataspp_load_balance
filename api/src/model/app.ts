@@ -1,6 +1,6 @@
 import Message, {IMessage} from "./message";
 
-class Repository {
+export class App {
     public GetMessages = (): Promise<IMessage[]> =>
         this.ToPromise(c => Message.find(c));
 
@@ -23,5 +23,3 @@ class Repository {
             resolve(res);
         }));
 }
-
-export default Repository;

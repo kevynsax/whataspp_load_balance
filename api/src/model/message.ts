@@ -1,15 +1,6 @@
-import {connect, Document, Schema, model} from 'mongoose';
+import {Document, Schema, model, connect} from 'mongoose';
 import {connectionString, messageCollection} from "./constants";
 import {Logger} from "@overnightjs/logger";
-
-connect(connectionString, (err: any) => {
-    if(err){
-        Logger.Err('Error connecting to Mongo Db');
-        return;
-    }
-
-    Logger.Info('Successfully Connected to Mongo Db');
-});
 
 export interface IMessage extends Document{
     text: string;
