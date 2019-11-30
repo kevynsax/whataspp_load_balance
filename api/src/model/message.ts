@@ -1,11 +1,15 @@
-import {Document, Schema, model, connect} from 'mongoose';
-import {connectionString, messageCollection} from "./constants";
-import {Logger} from "@overnightjs/logger";
+import {Document, Schema, model} from 'mongoose';
+import {messageCollection} from "./constants";
 
 export interface IMessage extends Document{
     text: string;
     phones: string[];
     active: boolean;
+}
+
+export interface TORedirectMessage {
+    text: string;
+    phone: string;
 }
 
 export const MessageSchema = new Schema({
