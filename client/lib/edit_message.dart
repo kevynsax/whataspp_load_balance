@@ -14,7 +14,9 @@ class _EditMessageState extends State<EditMessage> {
   Widget build(BuildContext context) {
     return Consumer<AppStateModel>(
       builder: (context, model, child){
-        return 
+        return Container(
+          child: Text('This is the edit text'),
+        );
       });
   }
 }

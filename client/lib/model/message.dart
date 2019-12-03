@@ -15,4 +15,12 @@ class Message{
   }): assert(text != null),
       assert(phones != null),
       assert(active != null);
+  
+  factory Message.fromJson(Map<String, dynamic> json) =>
+      Message(
+        id: json['_id'],
+        text: json['text'],
+        phones: json['phones'].toString().split(',').toList(),
+        active: json['active'] == 'true'
+      );
 }

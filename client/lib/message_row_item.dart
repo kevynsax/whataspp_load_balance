@@ -60,7 +60,7 @@ class MessageRowItem extends StatelessWidget {
             onPressed: (){
               final model = Provider.of<AppStateModel>(context);
               model.selectMessage(message);
-              Navigator.pushNamed(context, EditMessage.routeName)
+              Navigator.pushNamed(context, EditMessage.routeName);
             },
           )
         ],

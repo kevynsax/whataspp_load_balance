@@ -1,3 +1,5 @@
+import 'package:http/http.dart';
+
 import 'model/message.dart';
 
 class Service{
@@ -21,4 +23,8 @@ class Service{
             active: true
           )
       ].toList());
+
+  static Future<List<Message>> listMessages(int id) =>
+      get('').then((value) => <Message>[]);
+
 }
