@@ -20,7 +20,7 @@ class Message{
       Message(
         id: json['_id'],
         text: json['text'],
-        phones: json['phones'].toString().split(',').toList(),
+        phones: List<String>.from(json['phones']),
         active: json['active'] == 'true'
       );
 }

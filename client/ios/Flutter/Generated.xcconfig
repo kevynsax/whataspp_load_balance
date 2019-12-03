@@ -1,10 +1,9 @@
 // This is a generated file; do not edit or check into version control.
-FLUTTER_ROOT=/Volumes/Files/KevynKlava/Development/flutter
-FLUTTER_APPLICATION_PATH=/Volumes/Files/KevynKlava/Projects/kevyn/whataspp_load_balance/client
-FLUTTER_TARGET=/Volumes/Files/KevynKlava/Projects/kevyn/whataspp_load_balance/client/lib/main.dart
+FLUTTER_ROOT=C:\src\flutter
+FLUTTER_APPLICATION_PATH=C:\Users\kevyn\source\repos\kesia\whatsapp_load_balance\client
+FLUTTER_TARGET=lib\main.dart
 FLUTTER_BUILD_DIR=build
-SYMROOT=${SOURCE_ROOT}/../build/ios
-FLUTTER_FRAMEWORK_DIR=/Volumes/Files/KevynKlava/Development/flutter/bin/cache/artifacts/engine/ios
+SYMROOT=${SOURCE_ROOT}/../build\ios
+FLUTTER_FRAMEWORK_DIR=C:\src\flutter\bin\cache\artifacts\engine\ios
 FLUTTER_BUILD_NAME=1.0.0
 FLUTTER_BUILD_NUMBER=1
-TRACK_WIDGET_CREATION=true

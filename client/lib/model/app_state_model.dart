@@ -9,7 +9,7 @@ class AppStateModel extends ChangeNotifier{
   List<Message> getMessages() => _messages;
 
   void loadMessages(){
-    Service.ListMessages()
+    Service.listMessages()
         .then((val){
           _messages = val;
           notifyListeners();
