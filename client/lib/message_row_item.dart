@@ -1,5 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:whatsapp_load_balance/edit_message.dart';
+import 'package:whatsapp_load_balance/model/app_state_model.dart';
+import 'package:whatsapp_load_balance/styles.dart';
 
 import 'model/message.dart';
 
@@ -29,15 +33,36 @@ class MessageRowItem extends StatelessWidget {
         children: <Widget>[
           Expanded(
             child: Padding(
-              padding: EdgeInsets.all(8),
+              padding: EdgeInsets.symmetric(horizontal: 12),
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  Text(message.text),
-                  Text(message.phones.join(', '))
+                  Text(message.text,
+                    overflow: TextOverflow.ellipsis,
+                    style: Styles.messageRowItemName,
+                  ),
+                  const Padding(padding: EdgeInsets.only(top: 8)),
+                  Text(message.phones.join(', '),
+                    overflow: TextOverflow.ellipsis,
+                    style: Styles.messageRowItemPhones,
+                  )
                 ],
               ),
             ),
           ),
+          CupertinoButton(
+            padding: EdgeInsets.zero,
+            child: const Icon(
+              CupertinoIcons.forward,
+              semanticLabel: 'Open',
+            ),
+            onPressed: (){
+              final model = Provider.of<AppStateModel>(context);
+              model.selectMessage(message);
+              Navigator.pushNamed(context, EditMessage.routeName)
+            },
+          )
         ],
       ),
     );
@@ -52,7 +77,7 @@ class MessageRowItem extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 16),
           child: Container(
             height: 1,
-            color: Color(0xFFD9D9D9),
+            color: Styles.messageRowDivider,
           ),
         )
       ],
