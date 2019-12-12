@@ -36,26 +36,29 @@ class MessageRowItem extends StatelessWidget {
         bottom: 8
       ),
       child: GestureDetector(
-        onTap: openMessage,
+        onVerticalDragDown: (det) => print('did the drag'),
         child: Row(
           children: <Widget>[
             Expanded(
-              child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 12),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Text(message.text,
-                      overflow: TextOverflow.ellipsis,
-                      style: Styles.messageRowItemName,
-                    ),
-                    const Padding(padding: EdgeInsets.only(top: 8)),
-                    Text(message.phones.join(', '),
-                      overflow: TextOverflow.ellipsis,
-                      style: Styles.messageRowItemPhones,
-                    )
-                  ],
+              child: GestureDetector(
+                onTap: openMessage,
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 12),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text(message.text,
+                        overflow: TextOverflow.ellipsis,
+                        style: Styles.messageRowItemName,
+                      ),
+                      const Padding(padding: EdgeInsets.only(top: 8)),
+                      Text(message.phones.join(', '),
+                        overflow: TextOverflow.ellipsis,
+                        style: Styles.messageRowItemPhones,
+                      )
+                    ],
+                  ),
                 ),
               ),
             ),

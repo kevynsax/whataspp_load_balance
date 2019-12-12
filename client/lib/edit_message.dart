@@ -62,16 +62,35 @@ class _EditMessageState extends State<EditMessage> {
         Navigator.pop(context);
       }
 
+      void deleteMessage(){
+        model.deleteMessage();
+        Navigator.pop(context);
+      }
+
       return CupertinoPageScaffold(
         navigationBar: CupertinoNavigationBar(
           middle: Text('Edit Message'),
-          trailing: CupertinoButton(
-            padding: EdgeInsets.zero,
-            child: const Icon(
-              CupertinoIcons.check_mark_circled,
-              semanticLabel: 'Save',
-            ),
-            onPressed: saveMessage,
+          trailing: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              CupertinoButton(
+                padding: EdgeInsets.zero,
+                child: const Icon(
+                  CupertinoIcons.delete_solid,
+                  semanticLabel: 'Delete',
+                ),
+                onPressed: deleteMessage,
+              ),
+              CupertinoButton(
+                padding: EdgeInsets.zero,
+                child: const Icon(
+                  CupertinoIcons.check_mark_circled,
+                  semanticLabel: 'Save',
+                ),
+                onPressed: saveMessage,
+              ),
+
+            ],
           ),
         ),
         child: CupertinoScrollbar(

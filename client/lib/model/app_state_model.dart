@@ -31,4 +31,8 @@ class AppStateModel extends ChangeNotifier{
     Service.updateMessage(msg)
       .then((val) => this.loadMessages());
   }
+
+  void deleteMessage(){
+    Service.deleteMessage
+  }
 }

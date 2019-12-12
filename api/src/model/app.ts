@@ -14,8 +14,11 @@ export class App {
     public saveMessage = (msg: IMessage): Promise<IMessage> =>
         this.repoToPromise(callback => Message.insertMany([msg], (err, res) => callback(err, res[0])));
 
-    public updateMessage = (id: string, msg: IMessage) =>
+    public updateMessage = (id: string, msg: IMessage): Promise<IMessage> =>
         this.repoToPromise(callback => Message.updateOne({"_id": id}, msg, (err, _) => callback(err, msg)));
+
+    public deleteMessage = (id: string): Promise<void> =>
+        this.repoToPromise(callback => Message.deleteOne({"_id": id}, err => callback(err)));
 
     private balanceBetweenPhoneNumbers = (msg: IMessage): TORedirectMessage => ({
         text: msg.text,
@@ -32,3 +35,4 @@ export class App {
             resolve(res);
         }));
 }
+

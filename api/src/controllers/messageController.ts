@@ -1,4 +1,4 @@
-import {Controller, Get, Post, Put} from "@overnightjs/core";
+import {Controller, Delete, Get, Post, Put} from "@overnightjs/core";
 import {Request, Response} from 'express';
 import {Logger} from "@overnightjs/logger";
 import {App} from "../model/app";
@@ -34,6 +34,13 @@ export class MessageController {
         Logger.Info(`Updating message: ${req.params.id}`);
 
         this.responseFactory(res, () => this.app.updateMessage(req.params.id, req.body));
+    }
+
+    @Delete(':id')
+    private deleteMessage(req: Request, res: Response){
+        Logger.Info(`Request to delete message: ${req.params.id}`);
+
+        this.responseFactory(res, () => this.app.deleteMessage(req.params.id));
     }
 
     private responseFactory = <T>(res: Response, callback: () => Promise<T>): void => {
