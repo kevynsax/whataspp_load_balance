@@ -16,32 +16,34 @@ class _ListMessagesState extends State<ListMessages> {
     return Consumer<AppStateModel>(
       builder: (context, model, child){
         final messages = model.getMessages();
-        return CustomScrollView(
-          semanticChildCount: messages.length,
-          slivers: <Widget>[
-            CupertinoSliverNavigationBar(
-              largeTitle: const Text('Messages'),
-              middle: const Text('Whatsapp Redirect'),
-            ),
-            SliverSafeArea(
-              top: false,
-              minimum: const EdgeInsets.only(top: 8),
-              sliver: SliverList(
-                delegate: SliverChildBuilderDelegate(
-                    (context, index){
-                      if(index >= messages.length)
-                        return null;
-
-                      return MessageRowItem(
-                        index: index,
-                        message: messages[index],
-                        lastItem: messages.length - 1 == index,
-                      );
-                    }
-                ),
+        return CupertinoPageScaffold(
+          child: CustomScrollView(
+            semanticChildCount: messages.length,
+            slivers: <Widget>[
+              CupertinoSliverNavigationBar(
+                largeTitle: const Text('Messages'),
+                middle: const Text('Whatsapp Redirect'),
               ),
-            )
-          ],
+              SliverSafeArea(
+                top: false,
+                minimum: const EdgeInsets.only(top: 8),
+                sliver: SliverList(
+                  delegate: SliverChildBuilderDelegate(
+                      (context, index){
+                        if(index >= messages.length)
+                          return null;
+
+                        return MessageRowItem(
+                          index: index,
+                          message: messages[index],
+                          lastItem: messages.length - 1 == index,
+                        );
+                      }
+                  ),
+                ),
+              )
+            ],
+          ),
         );
       }
     );
