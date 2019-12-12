@@ -26,4 +26,9 @@ class AppStateModel extends ChangeNotifier{
   void newMessage(){
     selectMessage(Message());
   }
+
+  void updateMessage(Message msg){
+    Service.updateMessage(msg)
+      .then((val) => this.loadMessages());
+  }
 }

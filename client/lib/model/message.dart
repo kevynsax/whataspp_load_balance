@@ -1,4 +1,6 @@
 
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 
 class Message{
@@ -23,4 +25,7 @@ class Message{
         phones: List<String>.from(json['phones']),
         active: json['active'] == 'true'
       );
+
+  String toJson() =>
+      '{"_id": "$id", "text": "$text", "phones": ["${phones.join('", "')}"], "active": $active}';
 }
