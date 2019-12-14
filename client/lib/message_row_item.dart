@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:whatsapp_load_balance/edit_message.dart';
-import 'package:whatsapp_load_balance/model/app_state_model.dart';
-import 'package:whatsapp_load_balance/styles.dart';
+import 'package:whatsapp_load_balance_clinet/edit_message.dart';
+import 'package:whatsapp_load_balance_clinet/model/app_state_model.dart';
+import 'package:whatsapp_load_balance_clinet/styles.dart';
 
 import 'model/message.dart';
 

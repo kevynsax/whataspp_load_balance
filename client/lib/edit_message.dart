@@ -2,10 +2,10 @@ import 'package:esys_flutter_share/esys_flutter_share.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:whatsapp_load_balance/model/app_state_model.dart';
-import 'package:whatsapp_load_balance/model/message.dart';
-import 'package:whatsapp_load_balance/phone_field.dart';
-import 'package:whatsapp_load_balance/service.dart';
+import 'package:whatsapp_load_balance_clinet/model/app_state_model.dart';
+import 'package:whatsapp_load_balance_clinet/model/message.dart';
+import 'package:whatsapp_load_balance_clinet/phone_field.dart';
+import 'package:whatsapp_load_balance_clinet/service.dart';
 
 class EditMessage extends StatefulWidget {
   static String routeName = 'message/edit';

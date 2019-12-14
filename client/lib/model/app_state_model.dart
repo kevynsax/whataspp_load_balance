@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
-import 'package:whatsapp_load_balance/model/message.dart';
-import 'package:whatsapp_load_balance/service.dart';
+import 'package:whatsapp_load_balance_clinet/model/message.dart';
+import 'package:whatsapp_load_balance_clinet/service.dart';
 
 class AppStateModel extends ChangeNotifier{
   List<Message> _messages = [];
