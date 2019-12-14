@@ -1,23 +1,16 @@
 import 'package:flutter/cupertino.dart';
 
 class PhoneField extends StatelessWidget {
-  final String value;
-  final ValueChanged<String> onChanged;
-
-  TextEditingController _controller = TextEditingController();
+  final TextEditingController controller;
 
   PhoneField({
-    this.value,
-    this.onChanged
-  }): assert(value != null),
-      assert(onChanged != null){
-    _controller.text = value;
-  }
+    this.controller
+  });
 
   @override
   Widget build(BuildContext context) {
     return CupertinoTextField(
-      controller: _controller,
+      controller: controller,
       prefix: Icon(
         CupertinoIcons.phone,
         color: CupertinoColors.lightBackgroundGray,
@@ -31,11 +24,6 @@ class PhoneField extends StatelessWidget {
       decoration: BoxDecoration(
           border: Border(bottom: BorderSide(width: 0, color: CupertinoColors.inactiveGray))
       ),
-      onEditingComplete: () => this.onChanged(_controller.value.text),
-      onSubmitted: (text){
-        FocusScope.of(context).requestFocus(FocusNode());
-        this.onChanged(text);
-      },
     );
   }
 }

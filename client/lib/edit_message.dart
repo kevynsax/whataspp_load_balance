@@ -1,9 +1,11 @@
+import 'package:esys_flutter_share/esys_flutter_share.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:whatsapp_load_balance/model/app_state_model.dart';
 import 'package:whatsapp_load_balance/model/message.dart';
 import 'package:whatsapp_load_balance/phone_field.dart';
+import 'package:whatsapp_load_balance/service.dart';
 
 class EditMessage extends StatefulWidget {
   static String routeName = 'message/edit';
@@ -13,9 +15,8 @@ class EditMessage extends StatefulWidget {
 }
 
 class _EditMessageState extends State<EditMessage> {
-  List<String> phones;
-
-  TextEditingController _textController = TextEditingController();
+  List<TextEditingController> _phoneControllers;
+  final _textController = TextEditingController();
 
   @override
   void initState() {
@@ -24,15 +25,7 @@ class _EditMessageState extends State<EditMessage> {
 
   void addPhone(){
     setState(() {
-      phones.add('');
-    });
-  }
-
-  void changePhone(int index, String val){
-    setState(() {
-      phones[index] = val;
-      print(index);
-      print(val);
+      _phoneControllers.add(TextEditingController());
     });
   }
 
@@ -46,18 +39,17 @@ class _EditMessageState extends State<EditMessage> {
     );
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Consumer<AppStateModel>(builder: (context, model, child) {
-      phones = model.selectedMessage.phones;
+      _phoneControllers = model.selectedMessage.phones.map((phone) => TextEditingController()..text = phone).toList();
       _textController.text = model.selectedMessage.text;
 
       void saveMessage(){
         model.saveMessage(Message(
           active: true,
           id: model.selectedMessage.id,
-          phones: phones.where((e) => e.length > 0).toList(),
+          phones: _phoneControllers.where((phone) => phone.value.text.length > 0).map((c) => c.value.text).toList(),
           text: _textController.value.text
         ));
 
@@ -69,31 +61,41 @@ class _EditMessageState extends State<EditMessage> {
         Navigator.pop(context);
       }
 
-      final list = <Widget>[
-        model.selectedMessage.id.length > 0 ? CupertinoButton(
-          padding: EdgeInsets.zero,
-          child: const Icon(
-            CupertinoIcons.delete_solid,
-            semanticLabel: 'Delete',
-          ),
-          onPressed: deleteMessage,
-        ) : null,
-        CupertinoButton(
-          padding: EdgeInsets.zero,
-          child: const Icon(
-            CupertinoIcons.check_mark_circled,
-            semanticLabel: 'Save',
-          ),
-          onPressed: saveMessage,
+      final trashButton = CupertinoButton(
+        padding: EdgeInsets.zero,
+        child: const Icon(
+          CupertinoIcons.delete_solid,
+          semanticLabel: 'Delete',
         ),
-      ].where((v) => v != null).toList();
+        onPressed: deleteMessage,
+      );
+
+      final shareButton = CupertinoButton(
+        padding: EdgeInsets.zero,
+        child: const Icon(
+          CupertinoIcons.share_up,
+          semanticLabel: 'Share',
+        ),
+        onPressed: () => Share.text('Link to redirect', '$baseUrl/${model.selectedMessage.id}', 'text/pain'),
+      );
+
+      final saveButton = CupertinoButton(
+        padding: EdgeInsets.zero,
+        child: const Icon(
+          CupertinoIcons.check_mark_circled,
+          semanticLabel: 'Save',
+        ),
+        onPressed: saveMessage,
+      );
 
       return CupertinoPageScaffold(
         navigationBar: CupertinoNavigationBar(
           middle: Text('Edit Message'),
           trailing: Row(
             mainAxisSize: MainAxisSize.min,
-            children: list,
+            children: model.selectedMessage.id.length > 0 ?
+              [trashButton, saveButton, shareButton] :
+              [saveButton],
           ),
         ),
         child: CupertinoScrollbar(
@@ -118,12 +120,11 @@ class _EditMessageState extends State<EditMessage> {
                         )
                       ],
                     ),
-                      ...phones.map((phone) =>
+                      ..._phoneControllers.map((phone) =>
                           Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: PhoneField(
-                              value: phone,
-                              onChanged: (text) => changePhone(phones.indexOf(phone), text),
+                              controller: phone,
                             ),
                           )
                       ).toList(),
