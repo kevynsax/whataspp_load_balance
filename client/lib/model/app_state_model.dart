@@ -24,15 +24,25 @@ class AppStateModel extends ChangeNotifier{
   }
 
   void newMessage(){
-    selectMessage(Message());
+    selectMessage(Message(
+      text: '',
+      phones: <String>[],
+      active: true,
+      id: ''
+    ));
   }
 
-  void updateMessage(Message msg){
-    Service.updateMessage(msg)
+  void saveMessage(Message msg){
+    final action = msg.id.length > 0
+        ? Service.updateMessage
+        : Service.insertMessage;
+
+    action(msg)
       .then((val) => this.loadMessages());
   }
 
   void deleteMessage(){
-    Service.deleteMessage
+    Service.deleteMessage(_selectedMessage.id)
+        .then((val) => this.loadMessages());
   }
 }

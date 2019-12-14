@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
+import 'package:whatsapp_load_balance/edit_message.dart';
 import 'package:whatsapp_load_balance/message_row_item.dart';
 
 import 'model/app_state_model.dart';
@@ -16,13 +17,30 @@ class _ListMessagesState extends State<ListMessages> {
     return Consumer<AppStateModel>(
       builder: (context, model, child){
         final messages = model.getMessages();
+
+        void newMessage(){
+          model.newMessage();
+          Navigator.pushNamed(context, EditMessage.routeName);
+        }
+
         return CupertinoPageScaffold(
           child: CustomScrollView(
             semanticChildCount: messages.length,
             slivers: <Widget>[
               CupertinoSliverNavigationBar(
-                largeTitle: const Text('Messages'),
-                middle: const Text('Whatsapp Redirect'),
+                middle: Text('WhatsApp Balance'),
+                largeTitle: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Text('Messages'),
+                    CupertinoButton(
+                        child: const Icon(
+                          CupertinoIcons.plus_circled,
+                          semanticLabel: 'Add Message',
+                        )
+                        , onPressed: newMessage),
+                  ],
+                ),
               ),
               SliverSafeArea(
                 top: false,

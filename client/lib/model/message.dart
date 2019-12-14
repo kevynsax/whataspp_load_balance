@@ -26,6 +26,11 @@ class Message{
         active: json['active'] == 'true'
       );
 
-  String toJson() =>
-      '{"_id": "$id", "text": "$text", "phones": ["${phones.join('", "')}"], "active": $active}';
+  String toJson() {
+    final body = '"text": "$text", "phones": ["${phones.join('", "')}"], "active": $active';
+    final indexBody = id.length > 0 ? '"_id": "$id", ' : '';
+    final result = '{$indexBody $body}';
+
+    return result;
+  }
 }

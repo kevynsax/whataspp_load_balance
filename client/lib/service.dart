@@ -17,4 +17,11 @@ class Service{
       put('$baseUrl/${msg.id}', body: msg.toJson(), headers: headers)
         .then((r) => json.decode(r.body))
         .then((val) => Message.fromJson(val));
+
+  static Future<Message> insertMessage(Message msg) =>
+    post(baseUrl, body: msg.toJson(), headers: headers)
+      .then((r) => json.decode(r.body))
+      .then((val) => Message.fromJson(val));
+
+  static Future deleteMessage(String id) => delete('$baseUrl/$id');
 }

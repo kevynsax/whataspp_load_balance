@@ -31,6 +31,8 @@ class _EditMessageState extends State<EditMessage> {
   void changePhone(int index, String val){
     setState(() {
       phones[index] = val;
+      print(index);
+      print(val);
     });
   }
 
@@ -52,7 +54,7 @@ class _EditMessageState extends State<EditMessage> {
       _textController.text = model.selectedMessage.text;
 
       void saveMessage(){
-        model.updateMessage(Message(
+        model.saveMessage(Message(
           active: true,
           id: model.selectedMessage.id,
           phones: phones.where((e) => e.length > 0).toList(),
@@ -67,30 +69,31 @@ class _EditMessageState extends State<EditMessage> {
         Navigator.pop(context);
       }
 
+      final list = <Widget>[
+        model.selectedMessage.id.length > 0 ? CupertinoButton(
+          padding: EdgeInsets.zero,
+          child: const Icon(
+            CupertinoIcons.delete_solid,
+            semanticLabel: 'Delete',
+          ),
+          onPressed: deleteMessage,
+        ) : null,
+        CupertinoButton(
+          padding: EdgeInsets.zero,
+          child: const Icon(
+            CupertinoIcons.check_mark_circled,
+            semanticLabel: 'Save',
+          ),
+          onPressed: saveMessage,
+        ),
+      ].where((v) => v != null).toList();
+
       return CupertinoPageScaffold(
         navigationBar: CupertinoNavigationBar(
           middle: Text('Edit Message'),
           trailing: Row(
             mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              CupertinoButton(
-                padding: EdgeInsets.zero,
-                child: const Icon(
-                  CupertinoIcons.delete_solid,
-                  semanticLabel: 'Delete',
-                ),
-                onPressed: deleteMessage,
-              ),
-              CupertinoButton(
-                padding: EdgeInsets.zero,
-                child: const Icon(
-                  CupertinoIcons.check_mark_circled,
-                  semanticLabel: 'Save',
-                ),
-                onPressed: saveMessage,
-              ),
-
-            ],
+            children: list,
           ),
         ),
         child: CupertinoScrollbar(
